@@ -1,0 +1,15 @@
+from collections import Counter
+names = Counter()
+
+totalStudent=int(input("Enter the total number of students: "))
+for i in range(totalStudent):
+    n=(input("Enter name: "))
+    names.update(n)
+print("names:",names)
+
+totalErase=int(input("Enter the total number of students you want to delete: "))
+for i in range(totalErase):
+    n=(input("Enter name: "))
+    if n in names:
+        del names[n]
+print("names:",names)
