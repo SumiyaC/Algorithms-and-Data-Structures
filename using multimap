@@ -1,0 +1,16 @@
+from collections import defaultdict
+namesAndId = defaultdict(list)
+
+totalStudent=int(input("Enter the total number of students: "))
+credits=[]
+
+for x in range(totalStudent):
+    c=(input("Enter name and id like 'name & id': "))
+    namesAndId[c].append(int(input("Enter credit: ")))
+print("Credits according to students Name and ID:",namesAndId)
+
+totalErase=int(input("Enter the total number of students you want to delete: "))
+for x in range(totalErase):
+    d = (input("Enter name and id like 'name & id': "))
+    namesAndId.pop(d)
+print("Remaining credits of students according to their Name and ID:",namesAndId)
