@@ -1,0 +1,16 @@
+import time
+t1=time.time()
+
+a=int(input("Give a number: "))
+b=[]
+for i in range(a+1):
+    b.append(i)
+
+from itertools import permutations
+p=permutations(b)
+
+for i in p:
+    print(i)
+
+t2=time.time()
+print("Run time for this algorithm:",t2-t1)
