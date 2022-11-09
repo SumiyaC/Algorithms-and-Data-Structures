@@ -1,0 +1,11 @@
+name=set()
+totalStudent=int(input("Enter the total number of students: "))
+for x in range(totalStudent):
+    name.add(input("Enter name: "))
+print("names:",name)
+totalErase=int(input("Enter the total number of students you want to delete: "))
+for x in range(totalErase):
+   erase=(input("Enter name/names for deleting: "))
+   if erase in name:
+       name.discard(erase)
+print("names:",name)
