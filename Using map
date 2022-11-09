@@ -1,0 +1,24 @@
+totalStudent=int(input("Enter the total number of students: "))
+namesAndId=[]
+credits=[]
+
+for x in range(totalStudent):
+    namesAndId.append(input("Enter name and id like 'name & id': "))
+
+def mappp(x):
+    credits.append(int(input("Enter credit: ")))
+    info = dict(zip(namesAndId, credits))
+    return info
+
+p=(list(map(mappp,namesAndId)))
+print("Credits according to students Name and ID:",p[-1])
+
+totalErase=int(input("Enter the total number of students you want to delete: "))
+for x in range(totalErase):
+    erase = (input("Enter name and id for deleting like 'name & id': "))
+    def mappp2(y):
+        if erase in p[-1]:
+            p[-1].pop(erase)
+
+    list(map(mappp2,namesAndId))
+print("Remaining credits of students according to their Name and ID:",p[-1])
