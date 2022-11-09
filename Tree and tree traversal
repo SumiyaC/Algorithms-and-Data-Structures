@@ -1,0 +1,172 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+    def childNode(self, data):
+        if data == self.data:
+            return
+
+        if data < self.data:
+            if self.left:
+                self.left.childNode(data)
+            else:
+                self.left = Node(data)
+        else:
+            if self.right:
+                self.right.childNode(data)
+            else:
+                self.right = Node(data)
+
+
+    def bfs_search(self, val):
+        if self.data == val:
+            return True
+
+        if val < self.data:
+            if self.left:
+                return self.left.bfs_search(val)
+            else:
+                return False
+
+        if val > self.data:
+            if self.right:
+                return self.right.bfs_search(val)
+            else:
+                return False
+
+
+    def infix(self):
+        lst = []
+
+        if self.left:
+            lst += self.left.infix()
+
+        lst.append(self.data)
+
+        if self.right:
+            lst += self.right.infix()
+
+        return lst
+
+
+    def postfix(self):
+        lst = []
+        if self.left:
+            lst += self.left.postfix()
+        if self.right:
+            lst += self.right.postfix()
+
+        lst.append(self.data)
+        return lst
+
+
+    def prefix(self):
+        lst = [self.data]
+        if self.left:
+            lst += self.left.prefix()
+        if self.right:
+            lst += self.right.prefix()
+        return lst
+
+
+    def add(self, val):
+        if self.data == val:
+            return
+        if val < self.data:
+            if self.left:
+                self.left.add(val)
+            else:
+                self.left = Node(val)
+        else:
+            if self.right:
+                self.right.add(val)
+            else:
+                self.right = Node(val)
+        return self
+
+
+    def find_min(self):
+        if self.left is None:
+            return self.data
+        return self.left.find_min()
+
+    def erase(self, val):
+        if val < self.data:
+            if self.left:
+                self.left = self.left.erase(val)
+        elif val > self.data:
+            if self.right:
+                self.right = self.right.erase(val)
+        else:
+            if self.left is None and self.right is None:
+                return None
+            elif self.left is None:
+                return self.right
+            elif self.right is None:
+                return self.left
+
+            min_val = self.right.find_min()
+            self.data = min_val
+            self.right = self.right.erase(min_val)
+        return self
+
+
+    def summation(self):
+        left_total=0
+        right_total = 0
+        if self.left:
+            left_total += self.left.summation()
+        if self.right:
+            right_total += self.right.summation()
+        return self.data + left_total + right_total
+
+
+    def height(self):
+        if self.data:
+            if self.left and self.right:
+                return 1+(max(self.left.height(),self.right.height()))
+            elif self.left:
+                return 1 + (self.left.height())
+            elif self.right:
+                return 1 + (self.right.height())
+            else:
+                return 1
+        else:
+            return 0
+
+
+def build_tree(elements):
+    print("Building tree with these elements:",elements)
+    root = Node(elements[0])
+
+    for i in range(1,len(elements)):
+        root.childNode(elements[i])
+    return root
+
+def select_tree():
+    numbers = []
+    nodes=0
+    for i in range(10):
+        nodes = int(input("Enter the nodes in your tree:"))
+        numbers.append(nodes)
+    return numbers
+
+
+if __name__ == '__main__':
+    numbers_tree = build_tree(select_tree())
+    #print("Input numbers:", select_tree())
+    b=int(input("Enter the number you want to search(BFS) in the tree:"))
+    print("The given number is available in the tree!!-",numbers_tree.bfs_search(b))
+    print("Total value of the tree nodes:", numbers_tree.summation())
+    print("After Infix traversal the tree looks like:", numbers_tree.infix())
+    print("After Postfix traversal the tree looks like:", numbers_tree.postfix())
+    print("After Prefix traversal the tree looks like:", numbers_tree.prefix())
+    print("The height of the tree is:",numbers_tree.height())
+    a=int(input("Enter the number you want to add in the tree:"))
+    numbers_tree.add(a)
+    print("After addition the updated tree looks like: ",numbers_tree.infix())
+    d = int(input("Enter the number you want to delete from the tree:"))
+    numbers_tree.erase(d)
+    print("After deleting the updated tree looks like: ", numbers_tree.infix())
