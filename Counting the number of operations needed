@@ -1,0 +1,33 @@
+import random
+array=[]
+
+for x in range(20):
+    a =random.randint(1,1000)
+    array.append(a)
+
+def countOperation():
+    c = 0
+    max=array[0]
+    c = c + 1
+    for x in range(20):
+        if array[x] > max:
+            c = c + 1
+            max=array[x]
+            c = c + 1
+    print("maximum number:", max)
+    print("Total operations needed to find the maximum number is :",c)
+
+    d = 0
+    min = array[0]
+    d = d + 1
+    for x in range(20):
+        if array[x] < min:
+            d = d + 1
+            min = array[x]
+            d = d + 1
+
+    print("minimum number:", min)
+    print("Total operations needed to find the minimum number is :", d)
+
+
+countOperation()
