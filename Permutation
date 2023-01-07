@@ -14,3 +14,5 @@ for i in p:
 
 t2=time.time()
 print("Run time for this algorithm:",t2-t1)
+print("Test commit")
+print("Another test")
